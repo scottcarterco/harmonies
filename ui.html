@@ -33,8 +33,66 @@
   <div id="harmony-colors">
   </div>
 
-  <script>
-    // UI code here
-  </script>
+<script>
+  document.getElementById('color-picker').addEventListener('change', (event) => {
+    updateHarmonyColors();
+  });
+
+  document.getElementById('eye-dropper').addEventListener('click', () => {
+    parent.postMessage({ pluginMessage: { type: 'eye-dropper' } }, '*');
+  });
+
+  document.getElementById('hex-code').addEventListener('input', (event) => {
+    updateHarmonyColors();
+  });
+
+  document.getElementById('color-harmony').addEventListener('change', (event) => {
+    updateHarmonyColors();
+  });
+
+  function updateHarmonyColors() {
+    const colorPicker = document.getElementById('color-picker').value;
+    const hexCode = document.getElementById('hex-code').value;
+    const color = hexCode || colorPicker;
+    const harmonyType = document.getElementById('color-harmony').value;
+    parent.postMessage({ pluginMessage: { type: 'get-color', color: color, harmonyType: harmonyType } }, '*');
+  }
+
+  window.onmessage = (event) => {
+    const message = event.data.pluginMessage;
+    if (message.type === 'update-color') {
+      document.getElementById('color-picker').value = message.color;
+      updateHarmonyColors();
+    } else if (message.type === 'update-harmony-colors') {
+      const harmonyColors = message.harmonyColors;
+      const harmonyColorsDiv = document.getElementById('harmony-colors');
+      harmonyColorsDiv.innerHTML = '';
+
+      harmonyColors.forEach((color) => {
+        const colorDiv = document.createElement('div');
+        const colorSwatch = document.createElement('div');
+        const colorHex = document.createElement('span');
+        const copyButton = document.createElement('button');
+
+        colorSwatch.style.backgroundColor = color;
+        colorSwatch.style.width = '40px';
+        colorSwatch.style.height = '40px';
+        colorHex.textContent = color;
+        copyButton.textContent = 'Copy';
+
+        copyButton.addEventListener('click', () => {
+          navigator.clipboard.writeText(color);
+          alert('Copied ' + color + ' to clipboard');
+        });
+
+        colorDiv.appendChild(colorSwatch);
+        colorDiv.appendChild(colorHex);
+        colorDiv.appendChild(copyButton);
+        harmonyColorsDiv.appendChild(colorDiv);
+      });
+    }
+  };
+</script>
+
 </body>
 </html>
