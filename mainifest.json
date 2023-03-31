@@ -1,0 +1,7 @@
+{
+  "name": "Color Harmony",
+  "id": "color-harmony",
+  "api": "1.0.0",
+  "main": "code.ts",
+  "ui": "ui.html"
+}
