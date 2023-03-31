@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 300px;
+      height: 400px;
+    }
+    button {
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select a color:</h2>
+  <input type="color" id="color-picker" value="#ff0000">
+  <button id="eye-dropper">Eye Dropper</button>
+  <input type="text" id="hex-code" placeholder="Enter Hex Code">
+  
+  <h3>Select color harmony:</h3>
+  <select id="color-harmony">
+    <option value="complementary">Complementary</option>
+    <option value="analogous">Analogous</option>
+    <option value="triadic">Triadic</option>
+  </select>
+  
+  <h3>Harmony Colors:</h3>
+  <div id="harmony-colors">
+  </div>
+
+  <script>
+    // UI code here
+  </script>
+</body>
+</html>
