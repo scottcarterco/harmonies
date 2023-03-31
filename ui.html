@@ -35,19 +35,7 @@
   </div>
 
 <script>
-  document.getElementById('color-picker').addEventListener('change', (event) => {
-    updateHarmonyColors();
-  });
-
-  document.getElementById('eye-dropper').addEventListener('click', () => {
-    parent.postMessage({ pluginMessage: { type: 'eye-dropper' } }, '*');
-  });
-
-  document.getElementById('hex-code').addEventListener('input', (event) => {
-    updateHarmonyColors();
-  });
-
-  document.getElementById('color-harmony').addEventListener('change', (event) => {
+  document.getElementById('generate').addEventListener('click', () => {
     updateHarmonyColors();
   });
 
@@ -61,10 +49,7 @@
 
   window.onmessage = (event) => {
     const message = event.data.pluginMessage;
-    if (message.type === 'update-color') {
-      document.getElementById('color-picker').value = message.color;
-      updateHarmonyColors();
-    } else if (message.type === 'update-harmony-colors') {
+    if (message.type === 'update-harmony-colors') {
       const harmonyColors = message.harmonyColors;
       const harmonyColorsDiv = document.getElementById('harmony-colors');
       harmonyColorsDiv.innerHTML = '';
@@ -94,6 +79,5 @@
     }
   };
 </script>
-
 </body>
 </html>
